@@ -5,11 +5,11 @@
 @section('contenu')
 <div id="fix" class='container'>
    <h1>Ajout d'une Liste</h1>
-   <form action="" method="POST">
+   <form action="" method="post">
        @csrf
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Titre</label>
-        <input type="text" name="title" class="form-control" id="exampleFormControlInput1" placeholder="">
+        <input value="{{old('title')}}" id="title" type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="exampleFormControlInput1" placeholder="">
     </div>
     @error('title')
     <div class='alert alert-danger'>
@@ -18,7 +18,7 @@
     @enderror
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">Contenu de la liste</label>
-        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <textarea name="description" class="form-control @error('description') is-invalid @enderror" name="description" id="description"" id="exampleFormControlTextarea1" rows="3"></textarea>
     </div>
     @error('description')
     <div class='alert alert-danger'>
@@ -27,7 +27,7 @@
     @enderror
     <div class="mb-3">
       <label for="exampleFormControlTextarea1" class="form-label">Auteur de la liste</label>
-      <input type="text" value='{{old('author')}}' name="author" class="form-control" id="exampleFormControlInput1" placeholder="">
+      <input id="author" type="text" value="{{ Auth::user()->pseudo }}" name="author" class="form-control @error('author') is-invalid @enderror" id="exampleFormControlInput1" placeholder="">
     </div>
     @error('author')
     <div class='alert alert-danger'>

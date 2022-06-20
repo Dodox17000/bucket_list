@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function home(){
+    public function home(Request $request){
+        $request->session()->put('username','Hello');
+        $username = $request->session()->get('username');
+        $bool = $request->session()->has('username');
         return view('home');
     }
     public function contact(){

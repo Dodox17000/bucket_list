@@ -7,9 +7,9 @@
    <h1>Modifier la liste</h1>
    <form action="" method="POST">
        @csrf
-    <div class="mb-3">
+    <div  class="mb-3">
         <label for="title" class="form-label">Modifier le Titre</label>
-        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{$list->titre}}" id="titre" placeholder="">
+        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{$list->title}}" id="titre" placeholder="">
       </div>
       @error('title')
          <div class='alert alert-danger'>

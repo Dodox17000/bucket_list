@@ -29,24 +29,22 @@ class WishController extends Controller
         $categories=Category::all();
         return view('list.add', compact('categories'));
     }
-    public function detail($id)
+    public function detail(Wish $wish)
     {
-        $detail = Wish::findOrFail($id);
-        return view('list.detail', compact("detail"));
+        return view('list.detail', compact("wish"));
     }
     //effacer une liste
-    public function delete($id)
+    public function delete(Wish $list)
     {
-        $list = Wish::find($id);
         $list->delete();
         return redirect()->route('liste');
     }
     //éditer une liste
     public function edit(Wish $list, Request $request)
     {
-        if ($request->isMethod("POST")) {
+        if ($request->isMethod("post")) {
             $this->isValidate($request, $list);
-            return redirect()->route("liste", ["id" => $list->id]);
+            return redirect()->route("liste", ["list" => $list->id]);
         }
         $categories=Category::all();
         // $list->remove();
@@ -57,13 +55,13 @@ class WishController extends Controller
             "title"=>['required',"min:5","max:250"],
             "description"=>['required',"min:10","max:250"],
             'category'=>['required','regex:/^[0-9]+$/'],
-            "author"=>['required',"min:5","max:250",'regex:/^[a-zA-Z]+$/']
+            "author"=>['required',"min:4","max:250",'regex:/^[a-zA-Z]+$/']
         ]);
         $list->title = $request->input('title');
         $list->description = $request->input('description');
         $list->author = $request->input('author');
         $list->isPublished = true;
-        $list->category_id== $request->input('category');
+        $list->category_id = $request->input('category');
         $list->save();
     }
 }

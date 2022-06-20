@@ -22,7 +22,7 @@ Route::get('/legal-stuff', [MainController::class, 'legal'])->name('legal');
 /**
  * whishController
  */
-Route::get('/detail/{id}', [WishController::class, 'detail'])->name('detail');
+Route::get('/detail/{wish}', [WishController::class, 'detail'])->name('detail');
 Route::get('/liste', [WishController::class, 'list'])->name('liste');
 //voir les Listes
 Route::get('/listes', [WishController::class, 'lists'])->name('listes');
@@ -31,7 +31,13 @@ Route::get('/listes', [WishController::class, 'lists'])->name('listes');
 Route::get('/liste/add', [WishController::class, 'add'])->name('liste_add');;
 Route::post('/liste/add', [WishController::class, 'add']);
 // supp un article
-Route::get('/liste/supprimer/{id}', [WishController::class, 'delete'])->name('liste_supprimer');
+Route::get('/liste/supprimer/{list}', [WishController::class, 'delete'])->name('liste_supprimer');
 //edit
-Route::get('/liste/editer/{id}', [WishController::class, 'edit'])->name('liste_editer');
-Route::post('/liste/editer/{id}', [WishController::class, 'edit']);
+Route::get('/liste/editer/{list}', [WishController::class, 'edit'])->name('liste_editer');
+Route::post('/liste/editer/{list}', [WishController::class, 'edit']);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

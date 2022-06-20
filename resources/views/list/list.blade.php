@@ -40,7 +40,13 @@ Gestion des listes
             <td>{{ $list->category->name  }}</td>
             <td>{{ $list->created_at }}</td>
             <td>
-                <a href="{{route('detail', ['id' =>$list->id])}}"class="btn btn-outline-primary">
+                <a href="{{ route("detail",['wish'=>$list->id]) }}"><i class="fa-solid fa-eye"></i></a>
+            </td>
+                @if(Auth::check())
+                <td> <a href="{{ route("liste_editer",['list'=>$list->id]) }}"><i class="fa-solid fa-pencil"></i></a> </td>
+                <td>  <a onclick="return confirm('Voulez-vous vraiment supprimer ce souhait?')" href="{{ route("liste_supprimer",['list'=>$list->id]) }}"><i class="fa-solid fa-delete-left"></i></a> </td>
+                @endif
+                {{-- <a href="{{route('detail', ['wish' =>$list->id])}}"class="btn btn-outline-primary">
                     <i class="fa-solid fa-eye"></i>
                 </a>
             </td>
@@ -53,7 +59,7 @@ Gestion des listes
                 <a onclick="return confirm('Voulez-vous vraiment supprimer cette Liste ?')" href="{{ route('liste_supprimer', ['id' =>$list->id]) }}" class="btn btn-outline-danger">
                     <i class="fa-solid fa-trash-can"></i>
                 </a>
-            </td>
+            </td> --}}
           </tr>
           @empty
               <tr><td colspan='5' style="text-align:center"> Il n'existe aucun souhait </td></tr>

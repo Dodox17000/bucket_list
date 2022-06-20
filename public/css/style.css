@@ -19,7 +19,9 @@ footer{
 #fix{
   margin-top: 5rem !important;
   }
-
+nav{
+  background-color: #ede0d5 !important;
+}
 #hero {
   height: 800px;
   overflow: hidden;
